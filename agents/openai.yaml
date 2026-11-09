@@ -1,0 +1,4 @@
+interface:
+  display_name: "IRMCT CLD 判例摘录检索"
+  short_description: "检索 IRMCT Case Law Database 的精选上诉摘录"
+  default_prompt: "使用 $IRMCTCldSearcher 检索 CLD；报告记录 id、案件、文书类型、日期和 extract，并提醒回到判决 PDF 核对。"
