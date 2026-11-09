@@ -2,7 +2,7 @@
 
 独立检索 IRMCT Case Law Database（CLD）。只访问 `cld.irmct.org`。
 
-仓库：<https://github.com/GDUFSICCSkills/IRMCTCldSearcher>（私有）。
+仓库：<https://github.com/HuiwowICCSkills/IRMCTCldSearcher>（私有）。
 
 ## 1. 环境
 
@@ -11,7 +11,7 @@ Python 3.10+，依赖 `requests`、`beautifulsoup4`、`pypdf`；无需登录。
 ## 2. 安装
 
 ```powershell
-git clone https://github.com/GDUFSICCSkills/IRMCTCldSearcher.git "$env:USERPROFILE\.codex\skills\IRMCTCldSearcher"
+git clone https://github.com/HuiwowICCSkills/IRMCTCldSearcher.git "$env:USERPROFILE\.codex\skills\IRMCTCldSearcher"
 python -m pip install -r "$env:USERPROFILE\.codex\skills\IRMCTCldSearcher\requirements.txt"
 ```
 
