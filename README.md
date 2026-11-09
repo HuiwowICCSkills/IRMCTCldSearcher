@@ -2,7 +2,7 @@
 
 独立检索 IRMCT Case Law Database（CLD）。只访问 `cld.irmct.org`。
 
-仓库：<https://github.com/HuiwowICCSkills/IRMCTCldSearcher>（私有）。
+仓库：<https://github.com/HuiwowICCSkills/IRMCTCldSearcher>（公开）。
 
 ## 1. 环境
 
