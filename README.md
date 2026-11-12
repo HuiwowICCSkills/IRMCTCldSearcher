@@ -41,21 +41,23 @@ $cld = "$env:USERPROFILE\.codex\skills\IRMCTCldSearcher\run.ps1"
 
 CLD 是精选上诉摘录，不是全部审判记录；引用前回到判决 PDF 核对段号和上下文。
 
-## 实测效果（2026-11-09）
+## 实测效果（2026-11-12）
 
-以下命令与结果来自本机 `~/.codex/skills/IRMCTCldSearcher` 的实网运行；检索日期 2026-11-09（Asia/Shanghai），输出为该次运行实际返回的 JSON 报告。
+以下命令与结果来自本机 `~/.codex/skills/IRMCTCldSearcher` 的实网运行；检索日期 2026-11-12（Asia/Shanghai），输出为该次运行实际返回的 JSON 报告。
 
 ```powershell
-& .\run.ps1 search 'command responsibility' --limit 5
+$cld = "$env:USERPROFILE\.codex\skills\IRMCTCldSearcher\run.ps1"
+& $cld search 'command responsibility' --mode advanced --limit 5
 ```
 
-- 状态：`ok`；CLD 检索报告 `total = 10`；本次返回 5 条。
+- 状态：`ok`；CLD 页面报告 `Showing 59 results`；本次返回 5 条。
+- 模式：`advanced`，使用 CLD 自身的 `/advanced-search/` 服务端检索，不是 `homedata.json` 本地过滤。
 - 代表性结果：
 
-| 题名 | 类型 / 日期 | 链接 |
+| 案件 / 文书 | 文书日期 | PDF |
 | --- | --- | --- |
-| HATEGEKIMANA Idelphonse — Decision on Referral — Referral \| Legal framework \| Command responsibility in Rwandan law | retrieved_metadata；2008-12-04 | https://cld.irmct.org/assets/filings/331-ICTR-00-55B-0081-HATEGEKIMANA-DECISION-ON-THE-PROSECUTION-S-APPEAL-AGAINST-DECISION-ON-REFFERAL-UNDER-RULE-11bis.pdf |
-| HADŽIHASANOVIĆ et al. — Decision on Command Responsibility — Superior responsibility \| Superior-subordinate relationship \| Successor liability | retrieved_metadata；2003-07-16 | https://cld.irmct.org/assets/Uploads/full-text-dec/2003/03-07-16 Hadzihasanovic Decision on Command Responsibility.pdf |
-| HADŽIHASANOVIĆ et al. — Decision on Command Responsibility — Superior responsibility \| Applicability in non-international armed conflict | retrieved_metadata；2003-07-16 | https://cld.irmct.org/assets/Uploads/full-text-dec/2003/03-07-16 Hadzihasanovic Decision on Command Responsibility.pdf |
+| MLADIĆ Ratko (MICT-13-56-A) — Appeal Judgement | 08.06.2021 | https://cld.irmct.org/assets/filings/Mladic-AJ-public-redacted-version.pdf |
+| TURINABO, Maximilien (MICT-18-116-PT) — Decision on Prosecution Appeal of Decision on Challenges to Jurisdiction | 28.06.2019 | https://cld.irmct.org/assets/filings/Decision-on-challenges-to-jurisdiction-contempt2.pdf |
+| KARADŽIĆ Radovan (MICT-13-55-A) — Appeal Judgement | 19.03.2019 | https://cld.irmct.org/assets/filings/2019.03.20-Karadzic-Appeal-Judgement.pdf |
 
-> 说明：`total = 10` 是 CLD 对该词的命中条数，检索范围为 `scope` 所述的 “curated appellate extracts across ICTY, ICTR and IRMCT”；本次返回 5 条，其中 4 条来自同一份 HADŽIHASANOVIĆ 裁定下的不同法律要点。返回项是 CLD 的**curated extract（编辑精选摘录）加元数据**，`content_scope` 写明它“not a complete trial record and not the judgment PDF itself”：`extract_text` 只是摘录段落，段号与脚注必须回到链接的 PDF 核对。链接指向该裁定/文书的 PDF，不是完整审判卷宗，也不能据此推断庭审全貌。
+> 说明：CLD 返回的是**精选上诉分庭摘录（curated extract）**，不是完整审判记录，也不是完整判决 PDF。`total=59` 是高级检索页的结果数；引用前必须回到 `filing_url` 的 PDF 核对段号、脚注和上下文。

@@ -18,6 +18,10 @@ description: 独立检索 IRMCT Case Law Database（CLD），按主题、案件�
 ```powershell
 & '<skill-dir>/run.ps1' search 'command responsibility' --limit 10 --out './cld-search.json'
 & '<skill-dir>/run.ps1' search 'genocide' --limit 5 --no-extract
+
+# 站点自身的 Advanced Search：全文 + Notion + 案件 + 文书类型 + 日期 + 法庭
+& '<skill-dir>/run.ps1' search 'command responsibility' --mode advanced --notion 'Superior responsibility' --tribunal ICTY --date-from 2010-01-01 --date-to 2020-12-31 --limit 10
+
 & '<skill-dir>/run.ps1' fetch 1 --out './cld-record.json' --text-out './cld-record.txt'
 & '<skill-dir>/run.ps1' doctor
 ```
@@ -28,6 +32,8 @@ description: 独立检索 IRMCT Case Law Database（CLD），按主题、案件�
 
 - CLD 是**精选上诉分庭摘录**，不是全部审判记录，也不是完整判决 PDF；`extract_text` 是 CLD 编辑后的摘录，引用前必须回到判决 PDF 核对段号和上下文。
 - `homedata.json` 是全量公开索引；`total` 是本地过滤后的命中数，不是全库记录数。
+- `--mode advanced` 调用 `https://cld.irmct.org/advanced-search/` 的服务端检索：`keyword` 检索摘录正文，`--notion`、`--case`、`--filing`、`--tribunal` 和日期范围是站点自身的分面；它比本地 `homedata.json` 过滤覆盖更多正文命中。`--notion` 可重复；标签按站点下拉框解析，大小写不敏感。
+- Advanced Search 每页 20 条，`total` 来自页面 `Showing N results`；返回的 `filing_url` 是判决 PDF，`case_url` 是案件页。高级模式不读取 `jsonExtract`，因为服务端返回的已经是摘录正文。
 - `fetch` 的 PDF 页文本页号是 PDF 位置，不是印刷页码；扫描件可能 `needs_ocr=true`。
 - CLD 的摘要可能省略脚注、反对意见和前后文；不要仅凭 `extract` 断言法院完整推理。
 
